@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-import { Paper, Typography, makeStyles, Box, Button } from '@material-ui/core';
+import { Paper, Typography, makeStyles, Box, Button, CircularProgress } from '@material-ui/core';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { authActions } from '../authSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +19,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LoginPage() {
   const classes = useStyles();
+  const dispatch = useAppDispatch();
+  const isLogging = useAppSelector((state) => state.auth.logging);
+  const handleLoginClick = () => {
+    //TODO: Get username and password from login form
+    dispatch(
+      authActions.login({
+        username: '',
+        password: '',
+      })
+    );
+  };
   return (
     <div className={classes.root}>
       <Paper elevation={1} className={classes.box}>
@@ -24,8 +37,8 @@ export default function LoginPage() {
           Student Management
         </Typography>
         <Box mt={4}>
-          <Button variant="contained" color="primary" fullWidth>
-            Login
+          <Button variant="contained" color="primary" fullWidth onClick={handleLoginClick}>
+            {isLogging && <CircularProgress size={20} color="secondary" />} &nbsp; Login
           </Button>
         </Box>
       </Paper>

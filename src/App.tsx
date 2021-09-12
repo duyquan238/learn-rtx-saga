@@ -1,15 +1,11 @@
-import cityApi from 'api/cityApi';
 import { NotFound, PrivateRoute } from 'components/Common';
 import { AdminLayout } from 'components/Layout';
 import LoginPage from 'features/auth/pages/LoginPage';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router';
 import './App.css';
 
 function App() {
-  useEffect(() => {
-    cityApi.getAll().then((response) => console.log(response));
-  });
   return (
     // <div className="App">
     //   <header className="App-header">
